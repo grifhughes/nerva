@@ -1,7 +1,7 @@
 # Nerva
 
 DISCLAIMER - main.c is only to show how the library functions would work in a real program, if you wish to run it yourself you need to download mnist_train.csv 
-and mnist_test.csv online ([here](https://pjreddie.com/projects/mnist-in-csv/)) is where I got mine (and also have the MKL installed).
+and mnist_test.csv online ([here](https://pjreddie.com/projects/mnist-in-csv/) is where I got mine) (and also have the MKL installed).
  
 Nerva is a simple 2-layer nerual network implementation for Intel CPUs written in C.  It utilizes the Intel MKL's CBLAS routines to compute the forward and
 backward passes.  Currently, the net uses the relu activation function + a softmax output layer, along with vanilla SGD and L2 regularization for training.

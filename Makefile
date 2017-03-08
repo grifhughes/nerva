@@ -1,7 +1,7 @@
 TARGET = prog
 LIBS = -lm -lmkl_intel_ilp64 -lmkl_sequential -lpthread -lmkl_core -ldl
 CC = gcc
-CFLAGS = -O3 -march=skylake
+CFLAGS = -O3 -march=native
 
 .PHONY: default all clean
 

@@ -23,7 +23,7 @@ average training time of 3m10s (1,800,000 iterations, 30 epochs) on my i5-6440HQ
 but I achieved better error rates as well as speed using vanilla SGD and a decaying (step decay) learning rate. 
 
 2. Adding minibatch SGD, although I like the ability to learn online with vanilla as it enables streaming 
-new data to the model in real time. 
+singular examples from new data to the model in real time. 
 
 3. Possibly implementing a parallel scheme (ensemble) in which 4 different models are trained on the same data, with 
 the gradients averaged to give the final updates. After training, each model would vote on the class of the test data.

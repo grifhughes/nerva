@@ -10,7 +10,7 @@ struct layer *hidden_layer_build(int features, int neurons)
         l->activations = matrix_alloc(l->neurons, l->weighted_input->cols);
         float scalar = sqrt(2.0 / features); /* He et al. relu weight initization */
         for(int i = 0; i < l->weights->size; ++i)
-                l->weights->data[i] = ((double)rand() / (double)RAND_MAX) * scalar;
+                l->weights->data[i] = ((float)rand() / (float)RAND_MAX) * scalar;
         return l;
 }
 
@@ -167,7 +167,7 @@ static void ann_train(struct ann *a, struct iod *io)
 {
         /* randomly sampling a training example each iteration adds noise to
          * training */
-        unsigned ind = ((io->batch - 1) + 1) * ((double)rand() / (double)RAND_MAX);
+        unsigned ind = ((io->batch - 1) + 1) * ((float)rand() / (float)RAND_MAX);
         ann_fprop(a, io->inputs[ind]);
         ann_bprop(a, io->inputs[ind], io->targets[ind]);
         ann_update_weights(a);
@@ -187,5 +187,5 @@ void ann_test(struct ann *a, struct iod *io)
                 if(ann_classify(a) == io->c[i])
                         --missed;
         }
-        a->err = ((double)missed / (double)io->batch) * 100.0;
+        a->err = ((float)missed / (float)io->batch) * 100.0f;
 }

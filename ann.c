@@ -21,7 +21,9 @@ struct layer *output_layer_build(struct ann *a, int neurons)
         l->weights = matrix_calloc(l->neurons, a->hidden->neurons); 
         l->weighted_input = matrix_alloc(l->neurons, 1);
         l->bias = matrix_calloc(l->neurons, l->weighted_input->cols);
-        l->activations = l->weighted_input; /* sneaky hobbitses */
+        l->activations = l->weighted_input; /* sneaky */
+        /* output layer's weighted input is not used to compute the gradients,
+         * therefore it can safely be aliased to avoid an extra allocation */ 
         return l;
 }
 
@@ -163,6 +165,8 @@ static void ann_update_weights(struct ann *a)
 
 static void ann_train(struct ann *a, struct iod *io)
 {
+        /* randomly sampling a training example each iteration adds noise to
+         * training */
         unsigned ind = ((io->batch - 1) + 1) * ((double)rand() / (double)RAND_MAX);
         ann_fprop(a, io->inputs[ind]);
         ann_bprop(a, io->inputs[ind], io->targets[ind]);
@@ -185,18 +189,3 @@ void ann_test(struct ann *a, struct iod *io)
         }
         a->err = ((double)missed / (double)io->batch) * 100.0;
 }
-
-/*  
- * Did you ever hear the Tragedy of Darth Plagueis the Wise?
- * I thought not. It's not a story the Jedi would tell you.
- * It's a Sith legend. 
- * Darth Plagueis was a Dark Lord of the Sith so powerful and so wise, 
- * he could use the Force to influence the midi-chlorians to create...life. 
- * He had such a knowledge of the Dark Side, 
- * he could even keep the ones he cared about...from dying. 
- * He became so powerful, the only thing he was afraid of was losing his power...
- * which, eventually of course, he did. 
- * Unfortunately, he taught his apprentice everything he knew. 
- * Then his apprentice killed him in his sleep. 
- * Ironic. He could save others from death...but not himself. 
- */

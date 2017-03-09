@@ -44,8 +44,8 @@ struct ann *ann_build(float regularization, float learn, int observations,
         struct ann *a = malloc(sizeof(struct ann));
         a->hidden = hidden_layer_build(features, hidden);
         a->output = output_layer_build(a, classes);
-        a->lrate  = learn;
         a->grads  = grads_build(a, features);
+        a->lrate  = learn;
         a->reg = 1.0 - ((a->lrate * regularization) / observations); 
         a->err = 100.0;
         return a;

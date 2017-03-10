@@ -10,7 +10,7 @@ The data is also automatically Gaussian normalized.
 
 # IO
 
-The IO functions expect the input data files in .csv, with the class of the example as the first number in each list.  
+The IO functions expect the input data files in .csv, with the class of the example as the first number in each list.   
 
 # Performance
 
@@ -29,3 +29,6 @@ singular examples from new data to the model in real time.
 the gradients averaged to give the final updates. After training, each model would vote on the class of the test data.
 
 4. CUDA extensions are in the works.
+
+5. IO should be moved to a separate library so the data can be preprocessed
+   rather than doing it immediately before training.

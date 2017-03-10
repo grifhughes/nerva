@@ -7,7 +7,7 @@
 #define FEATURES 784
 #define CLASSES 10
 #define LEARN 0.005
-#define EPOCHS 35 
+#define EPOCHS 25 
 
 int
 main(void)
